@@ -17,5 +17,6 @@ class TestRequest(TestCase,XMLAssertions):
 
     def test_search_parse(self):
     	ann = Announcements()
-    	searchresults = ann.search()
-    	self.assertEqual(searchresults, 'html here')
+    	searchresults = ann.search(datoFra='12.01.2017', datoTil='12.01.2017')
+    	self.assertEqual(searchresults['meta']['searchdate'], '12.01.2017')
+        self.assertEqual('name' in searchresults['results'][0], True)
