@@ -1,11 +1,11 @@
 # Brreg announcements
 This app scrapes the announcements section (kunngjøringer) of the Norwegian business registry (Brønnøysundregistrene) and returns the data on a structured format.
 
-# Install
+## Install
 
 `pip install git+https://github.com/anderser/brreg_announce.git`
 
-# Usage
+## Usage
 
 Search for announcements
 
@@ -20,10 +20,15 @@ searchresults = announcements.search(
 
 Returns object with keys for `meta`, `count` and `results`
 
-#Tests
+## Tests
 
 Run test using `nosetests`
 
 Run single test with i.e `nosetests brreg_announce.test.XX`
 
 Run tests with debug logging: `nosetests --debug=brreg_announce`
+
+## Info on data source
+
+More info on data source: https://w2.brreg.no/kunngjoring/
+Info on licensing/usage of data: https://www.brreg.no/produkter-og-tjenester/betingelser/
