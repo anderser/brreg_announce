@@ -3,7 +3,7 @@ from unittest import TestCase
 from xmltest import XMLAssertions
 
 import brreg_announce
-from brreg_announce.brregrequester import Announcements
+from brreg_announce.brreg import Announcements
 
 class TestRequest(TestCase,XMLAssertions):
     def testversion(self):
