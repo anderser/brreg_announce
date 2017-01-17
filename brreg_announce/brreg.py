@@ -32,7 +32,7 @@ class Announcements():
 			'datoTil': kwargs.get('datoTil',None),
 			'id_region': kwargs.get('id_region',300),
 			'id_fylke': kwargs.get('id_fylke',12),
-			'id_kommune': kwargs.get('id_fylke',None),
+			'id_kommune': kwargs.get('id_kommune',None),
 			'id_niva1': kwargs.get('id_niva1',1),
 			'id_bransje1': kwargs.get('id_bransje1',0),
 		}
