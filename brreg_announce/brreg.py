@@ -54,7 +54,7 @@ class Announcements():
 				if element['name'] != '':
 					element['orgnr'] = cols[3].text_content().strip().replace(' ','')
 					element['event'] = cols[5].text_content().strip()
-					element['detail_link'] = cols[5].xpath('.//a/@href')
+					element['detail_link'] = cols[5].xpath('.//a/@href')[0]
 					data.append(element)
 
 		return data

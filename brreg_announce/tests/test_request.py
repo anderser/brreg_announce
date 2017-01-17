@@ -8,7 +8,7 @@ from brreg_announce.brreg import Announcements
 class TestRequest(TestCase,XMLAssertions):
     def testversion(self):
         s = brreg_announce.version()
-        self.assertEqual(s, 0.1)
+        self.assertEqual(s, 0.2)
 
     def test_get_search_response_code(self):
     	ann = Announcements()
