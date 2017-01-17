@@ -16,7 +16,8 @@ logger = logging.getLogger(__name__)
 class Announcements():
 
 	def __init__(self):
-		self.SEARCH_BASE_URL = 'https://w2.brreg.no/kunngjoring/kombisok.jsp'
+		self.BASE_URL = 'https://w2.brreg.no/kunngjoring/'
+		self.SEARCH_BASE_URL = '%s%s' % (self.BASE_URL, 'kombisok.jsp')
 
 	def build_search(self, **kwargs):
 		"""
@@ -54,7 +55,7 @@ class Announcements():
 				if element['name'] != '':
 					element['orgnr'] = cols[3].text_content().strip().replace(' ','')
 					element['event'] = cols[5].text_content().strip()
-					element['detail_link'] = cols[5].xpath('.//a/@href')[0]
+					element['detail_link'] = '%s%s' % (self.BASE_URL, cols[5].xpath('.//a/@href')[0])
 					data.append(element)
 
 		return data
