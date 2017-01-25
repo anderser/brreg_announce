@@ -77,11 +77,16 @@ class Announcements():
 		metainfo = self._parse_metatable(tables[1])
 		logger.debug('Meta: %s' % metainfo )
 
-		count = int(tables[2].xpath('.//td//strong/text()')[1].strip())
-		logger.debug('Count: %s' % count )
-
-		results = self._parse_resultstable(tables[3])
-		resulttable = tables[3]
+		try:
+			count = int(tables[2].xpath('.//td//strong/text()')[1].strip())
+		except IndexError:
+			logger.debug('No announcements found')
+			results = []
+			count = 0
+		else:
+			logger.debug('Count: %s' % count )
+			results = self._parse_resultstable(tables[3])
+			resulttable = tables[3]
 
 		response = {
 			'meta': metainfo,

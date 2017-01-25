@@ -6,9 +6,6 @@ import brreg_announce
 from brreg_announce.brreg import Announcements
 
 class TestRequest(TestCase,XMLAssertions):
-    def testversion(self):
-        s = brreg_announce.version()
-        self.assertEqual(s, 0.3)
 
     def test_get_search_response_code(self):
     	ann = Announcements()
@@ -21,3 +18,10 @@ class TestRequest(TestCase,XMLAssertions):
     	self.assertEqual(searchresults['meta']['searchdate'], '12.01.2017')
         self.assertEqual('name' in searchresults['results'][0], True)
         self.assertEqual(len(searchresults['results']), 186)
+
+    def test_search_parse_empty_res(self):
+        ann = Announcements()
+        searchresults = ann.search(datoFra='22.01.2017', datoTil='22.01.2017')
+        self.assertEqual(searchresults['meta']['searchdate'], '22.01.2017')
+        self.assertEqual(searchresults['results'], [])
+        self.assertEqual(searchresults['count'], 0)
