@@ -28,7 +28,7 @@ class Announcements():
 
 		yesterday = datetime.now() - timedelta(days=1)
 
-		params = {
+		self.search_params = {
 			'datoFra': kwargs.get('datoFra',yesterday.strftime('%d.%m.%Y')),
 			'datoTil': kwargs.get('datoTil',None),
 			'id_region': kwargs.get('id_region',300),
@@ -38,7 +38,7 @@ class Announcements():
 			'id_bransje1': kwargs.get('id_bransje1',0),
 		}
 		logger.debug("Sending search request")
-		r = requests.get(self.SEARCH_BASE_URL, params=params)
+		r = requests.get(self.SEARCH_BASE_URL, params=self.search_params)
 
 		return r
 
@@ -54,8 +54,17 @@ class Announcements():
 				#check if this is a real row or one of the one-word/empty header rows
 				if element['name'] != '':
 					element['orgnr'] = cols[3].text_content().strip().replace(' ','')
-					element['event'] = cols[5].text_content().strip()
-					element['detail_link'] = '%s%s' % (self.BASE_URL, cols[5].xpath('.//a/@href')[0])
+					
+					#when only one date is given, then table looks different
+					if self.search_params['datoFra'] == self.search_params['datoTil']:
+						element['detail_link'] = '%s%s' % (self.BASE_URL, cols[5].xpath('.//a/@href')[0])
+						element['event'] = cols[5].text_content().strip()
+						element['date'] = self.search_params['datoFra']
+					else:
+						element['detail_link'] = '%s%s' % (self.BASE_URL, cols[7].xpath('.//a/@href')[0])
+						element['event'] = cols[7].text_content().strip()
+						element['date'] = cols[5].text_content().strip()
+
 					data.append(element)
 
 		return data
@@ -88,6 +97,7 @@ class Announcements():
 			results = self._parse_resultstable(tables[3])
 			resulttable = tables[3]
 
+		logger.debug(results)
 		response = {
 			'meta': metainfo,
 			'count': count,
