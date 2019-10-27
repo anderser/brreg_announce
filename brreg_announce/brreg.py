@@ -111,3 +111,21 @@ class Announcements():
 		results = self.build_search(**kwargs)
 		parsed = self.parse_search(results)
 		return parsed
+
+	def _parse_single_page(self, html_content):
+		tree = html.fromstring(html_content)
+		table = tree.xpath('//div[@id="pagecontent"]/table')[1]
+
+		content = {}
+		content['tingrett'] = table.xpath('.//tr[6]/td/span[2]/text()')
+		content['konkurs_aapnet_dato'] = table.xpath('.//tr[6]/td[1]/table[3]/tbody[1]/tr[1]/td[2]/text()')[0].strip()
+		content['konkurs_aapnet_etter'] = table.xpath('.//tr[6]/td[1]/table[4]/tbody[1]/tr[1]/td[2]/span/text()')[0].strip()
+		content['saksnummer'] = table.xpath('.//tr[6]/td[1]/table[5]/tbody[1]/tr[1]/td[2]/text()')[0].strip()
+		content['bostyrer'] = table.xpath('.//tr[6]/td/text()')[1:4]
+		logger.debug(content)
+		return table
+
+	def get_single_announcement(self, uri, event_type):
+
+		r = requests.get(uri)
+		return self._parse_single_page(r.content)
