@@ -40,7 +40,7 @@ class TestRequest(TestCase):
         obj = {'name': 'ÅSANE PARFYMERI & HUDPLEIE AS', 'orgnr': '914771056', 'detail_link': 'https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20190000699070&sokeverdi=914771056&spraak=nb', 'event': 'Konkursåpning', 'date': '30.09.2019'}
         #obj = {'name': 'VILLA EUROPA', 'orgnr': '988473618', 'detail_link': 'https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20190000713571&sokeverdi=988473618&spraak=nb', 'event': 'Konkursåpning', 'date': '11.10.2019'}
         res = ann.get_single_announcement(obj['detail_link'], obj['event'])
-        self.assertEqual(res['saksnummer'], '19-142694KON-BERG/')
+        self.assertEqual(res['Saksnr'], '19-142694KON-BERG/')
         
     def test_search_and_return_konkurser_bergen(self):
         ann = Announcements()
