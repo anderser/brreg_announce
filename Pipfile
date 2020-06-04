@@ -4,12 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-nosetests = "*"
-nose = "*"
+pylint = "*"
+pycodestyle = "*"
+autopep8 = "*"
 
 [packages]
 requests = "*"
 lxml = "*"
+nose = "*"
 
 [requires]
 python_version = "3.7"

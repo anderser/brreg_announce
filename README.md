@@ -22,11 +22,9 @@ Returns object with keys for `meta`, `count` and `results`
 
 ## Tests
 
-Run test using `nosetests`
+Run test using `pipenv run python -m unittest`
 
-Run single test with i.e `nosetests --debug=brreg_announce brreg_announce.tests.test_request:TestRequest.test_search_konkurser_bergen`
-
-Run tests with debug logging: `nosetests --debug=brreg_announce`
+Run single test: `pipenv run python -m unittest brreg_announce.tests.test_request.TestRequest.test_search_konkurser_openings_vestland`
 
 ## Info on data source
 
