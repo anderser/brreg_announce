@@ -1,6 +1,9 @@
 from unittest import TestCase
-
+import logging
 from brreg_announce.brreg import Announcements
+import sys
+
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 class TestRequest(TestCase):
 
@@ -30,10 +33,22 @@ class TestRequest(TestCase):
             datoTil='22.10.2019',
             id_niva1=51,
             id_region=300,
-            id_fylke=12,
-            id_kommune=1201
+            id_fylke=46,
+            id_kommune=4601
         )
-        self.assertEqual(searchresults['count'], 128)
+        self.assertEqual(searchresults['count'], 127)
+
+    def test_search_konkurser_openings_vestland(self):
+        ann = Announcements()
+        searchresults = ann.search(
+            datoFra='01.01.2019', 
+            datoTil='01.06.2020',
+            id_niva1=51,
+            id_niva2=56,
+            id_region=300,
+            id_fylke=46
+        )
+        self.assertEqual(searchresults['count'], 814)
 
     def test_single_announcement(self):
         ann = Announcements()
@@ -47,12 +62,12 @@ class TestRequest(TestCase):
         res = ann.search(
             fetch_details=True,
             datoFra='01.09.2019', 
-            datoTil='10.09.2019',
+            datoTil='05.09.2019',
             id_niva1=51,
             #id_niva2=54,
             id_region=300,
-            id_fylke=12,
-            id_kommune=1201
+            id_fylke=46,
+            id_kommune=4601
         )
-        self.assertEqual(searchresults['count'], 128)
+        self.assertEqual(res['count'], 11)
         
