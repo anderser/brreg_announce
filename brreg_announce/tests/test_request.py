@@ -41,14 +41,14 @@ class TestRequest(TestCase):
     def test_search_konkurser_openings_vestland(self):
         ann = Announcements()
         searchresults = ann.search(
-            datoFra='01.01.2019', 
-            datoTil='01.06.2020',
+            datoFra='01.01.2020', 
+            datoTil='04.06.2020',
             id_niva1=51,
             id_niva2=56,
             id_region=300,
             id_fylke=46
         )
-        self.assertEqual(searchresults['count'], 814)
+        self.assertEqual(searchresults['count'], 217)
 
     def test_single_announcement(self):
         ann = Announcements()
